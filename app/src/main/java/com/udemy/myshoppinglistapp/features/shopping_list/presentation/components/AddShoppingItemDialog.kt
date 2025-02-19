@@ -1,4 +1,4 @@
-package com.udemy.myshoppinglistapp.shopping_list.presentation.components
+package com.udemy.myshoppinglistapp.features.shopping_list.presentation.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 fun AddShoppingItemDialog(
     onDismissRequest: () -> Unit,
     onConfirm: (String, String) -> Unit,
+    onOpenMap: () -> Unit,
 ) {
     var itemName by remember { mutableStateOf("") }
     var itemQuantity by remember { mutableStateOf("") }
@@ -63,6 +64,10 @@ fun AddShoppingItemDialog(
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
                 )
+
+                Button(onClick = { onOpenMap() }) {
+                    Text(text = "Address")
+                }
             }
         })
 
@@ -71,5 +76,5 @@ fun AddShoppingItemDialog(
 @Preview
 @Composable
 private fun AddShoppingItemDialogPreview() {
-    AddShoppingItemDialog({}, { _, _ -> })
+    AddShoppingItemDialog({}, { _, _ -> }, {})
 }

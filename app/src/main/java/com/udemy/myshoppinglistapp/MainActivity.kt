@@ -12,7 +12,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.udemy.myshoppinglistapp.shopping_list.presentation.ShoppingListScreen
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.udemy.myshoppinglistapp.features.location.presentation.LocationViewModel
 import com.udemy.myshoppinglistapp.ui.theme.MyShoppingListAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,9 +21,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val viewModel: LocationViewModel = viewModel()
+
             MyShoppingListAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    ShoppingListScreen(modifier = Modifier.padding(innerPadding))
+                    ShoppingListApp(
+                        modifier = Modifier.padding(innerPadding),
+                        viewModel,
+                    )
                 }
             }
         }
@@ -33,7 +39,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun ShoppingListAppPreview() {
     MyShoppingListAppTheme {
-        ShoppingListScreen(Modifier.background(MaterialTheme.colorScheme.background))
+        ShoppingListApp(Modifier.background(MaterialTheme.colorScheme.background), viewModel())
     }
 }
 

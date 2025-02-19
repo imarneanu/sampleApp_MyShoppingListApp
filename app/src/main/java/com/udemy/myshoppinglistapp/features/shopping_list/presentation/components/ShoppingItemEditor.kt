@@ -1,4 +1,4 @@
-package com.udemy.myshoppinglistapp.shopping_list.presentation.components
+package com.udemy.myshoppinglistapp.features.shopping_list.presentation.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,9 +16,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import com.udemy.myshoppinglistapp.shopping_list.domain.model.ShoppingItem
+import com.udemy.myshoppinglistapp.features.shopping_list.domain.model.ShoppingItem
 
 @Composable
 fun ShoppingItemEditor(item: ShoppingItem, onEditComplete: (String, Int) -> Unit) {
@@ -59,7 +60,7 @@ fun ShoppingItemEditor(item: ShoppingItem, onEditComplete: (String, Int) -> Unit
     }
 }
 
-@PreviewLightDark
+@Preview(showBackground = true)
 @Composable
 private fun ShoppingItemEditorPreview() {
     ShoppingItemEditor(ShoppingItem(1, "Milk", 1), onEditComplete = { _, _ -> })

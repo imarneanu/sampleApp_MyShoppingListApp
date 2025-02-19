@@ -1,4 +1,4 @@
-package com.udemy.myshoppinglistapp.shopping_list.presentation
+package com.udemy.myshoppinglistapp.features.shopping_list.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,24 +16,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.udemy.myshoppinglistapp.shopping_list.domain.model.ShoppingItem
-import com.udemy.myshoppinglistapp.shopping_list.presentation.components.AddShoppingItemDialog
-import com.udemy.myshoppinglistapp.shopping_list.presentation.components.ShoppingItemEditor
-import com.udemy.myshoppinglistapp.shopping_list.presentation.components.ShoppingListItem
+import com.udemy.myshoppinglistapp.features.shopping_list.domain.model.ShoppingItem
+import com.udemy.myshoppinglistapp.features.shopping_list.presentation.components.AddShoppingItemDialog
+import com.udemy.myshoppinglistapp.features.shopping_list.presentation.components.ShoppingItemEditor
+import com.udemy.myshoppinglistapp.features.shopping_list.presentation.components.ShoppingListItem
 
 @Composable
-fun ShoppingListScreen(modifier: Modifier = Modifier) {
+fun ShoppingListScreen(modifier: Modifier = Modifier, address: String, onOpenMap: () -> Unit) {
     var shoppingItems by remember {
-        mutableStateOf(
-            listOf(
-                ShoppingItem(
-                    1,
-                    "Milk",
-                    1,
-                    false
-                )
-            )
-        )
+        mutableStateOf(listOf(ShoppingItem(1, "Milk", 1, false)))
     }
     var showDialog by remember { mutableStateOf(false) }
 
@@ -61,6 +52,7 @@ fun ShoppingListScreen(modifier: Modifier = Modifier) {
                         editedItem?.let {
                             it.name = name
                             it.quantity = quantity
+                            it.address = address
                         }
                     })
                 } else {
@@ -84,10 +76,11 @@ fun ShoppingListScreen(modifier: Modifier = Modifier) {
                     id = shoppingItems.size + 1,
                     name = itemName,
                     quantity = itemQuantity.toInt(),
+                    address = address,
                 )
                 shoppingItems += newItem
                 showDialog = false
-            }
-        )
+            },
+            onOpenMap = { onOpenMap() })
     }
 }
